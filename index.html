@@ -14,11 +14,31 @@
 
     /* === Hintergrund & Grundlayout === */
     body {
-      /* Leichter, dezenter Farbverlauf im Hintergrund */
       background: linear-gradient(120deg, #f0f4fa 0%, #fcfcfc 100%);
       color: #333;
       line-height: 1.6;
-      overflow-x: hidden; /* Verhindert horizontales Scrollen bei ausgeklappter Sidebar */
+      overflow-x: hidden;
+    }
+
+    /* === Button für Sidebar-Toggle === */
+    .sidebar-toggle {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: #4c84ff;
+      color: #fff;
+      border: none;
+      outline: none;
+      padding: 0.8rem 1.2rem;
+      font-size: 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 1001; /* über dem Hero/Bild */
+      transition: background 0.2s, transform 0.2s;
+    }
+    .sidebar-toggle:hover {
+      background-color: #3c6dd1;
+      transform: scale(1.05);
     }
 
     /* === Hero-Bereich mit <img> === */
@@ -58,16 +78,12 @@
     /* === Container für Sidebar & Hauptinhalt === */
     .page-container {
       display: flex;
-      /* Kein automatisches Zentrieren, damit Sidebar links bleibt */
       margin: 0;
       position: relative;
-      /* Optional: max-width, aber NICHT auto zentrieren */
-      max-width: 1300px;
+      max-width: 1300px; /* optional */
     }
 
-    /* ===============================
-       SIDEBAR: Ein- und ausklappbar
-       =============================== */
+    /* SIDEBAR fixiert links */
     .sidebar {
       position: fixed;
       top: 0;
@@ -77,7 +93,7 @@
       background: #ffffff;
       box-shadow: 2px 0 8px rgba(0,0,0,0.1);
       padding: 2rem 1rem;
-      transform: translateX(-260px); /* verborgen zu Beginn */
+      transform: translateX(-260px); /* unsichtbar zu Beginn */
       transition: transform 0.3s ease;
       z-index: 999;
     }
@@ -114,36 +130,13 @@
       text-decoration: none;
     }
 
-    /* === Button für Sidebar-Toggle === */
-    .sidebar-toggle {
-      position: fixed;
-      top: 1rem;
-      left: 1rem;
-      background: #4c84ff;
-      color: #fff;
-      border: none;
-      outline: none;
-      padding: 0.8rem 1.2rem;
-      font-size: 1.2rem;
-      border-radius: 6px;
-      cursor: pointer;
-      z-index: 1001;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .sidebar-toggle:hover {
-      background-color: #3c6dd1;
-      transform: scale(1.05);
-    }
-
-    /* === Hauptinhalt === */
+    /* HAUPTINHALT */
     .main-content {
       flex: 1;
       margin-left: 0; 
       padding: 2rem;
       transition: margin-left 0.3s ease;
-      /* Statt margin: 0 auto; -> wir entfernen auto-Zentrierung */
     }
-    /* Wenn Sidebar offen ist, rutscht Inhalt nach rechts */
     .sidebar.open ~ .main-content {
       margin-left: 250px;
     }
@@ -330,23 +323,20 @@
 </head>
 <body>
 
-<!-- HERO-BEREICH MIT IMG ANSTATT CSS-BACKGROUND -->
-<div class="hero">
-  <!-- Das Bild als <img> -->
-  <img class="hero-image" src="images/imageGeld.jpg" alt="Hero-Bild" />
+<!-- TOGGLE-BUTTON OBEN LINKS -->
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
 
-  <!-- Text-Overlay-Container -->
+<!-- HERO-BEREICH MIT IMG -->
+<div class="hero">
+  <img class="hero-image" src="images/imageGeld.jpg" alt="Hero-Bild" />
   <div class="hero-content">
-    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
     <h1>Gute Schulden - Schlechte Schulden</h1>
     <p>Ein Überblick zu Aufgaben, Einnahmen und Ausgaben des deutschen Staates</p>
   </div>
 </div>
 
-
 <!-- SEITEN-CONTAINER -->
 <div class="page-container">
-  
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <h2>Kategorien</h2>
