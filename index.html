@@ -20,7 +20,7 @@
       overflow-x: hidden;
     }
 
-    /* === Button für Sidebar-Toggle === */
+    /* === Button für Sidebar-Toggle (oben links) === */
     .sidebar-toggle {
       position: fixed;
       top: 1rem;
@@ -33,7 +33,7 @@
       font-size: 1.2rem;
       border-radius: 6px;
       cursor: pointer;
-      z-index: 1001; /* über dem Hero/Bild */
+      z-index: 1001; /* über Hero-Bild und Inhalt */
       transition: background 0.2s, transform 0.2s;
     }
     .sidebar-toggle:hover {
@@ -78,12 +78,11 @@
     /* === Container für Sidebar & Hauptinhalt === */
     .page-container {
       display: flex;
-      margin: 0;
       position: relative;
-      max-width: 1300px; /* optional */
+      /* Hier kein margin: auto, damit Sidebar links fixiert bleibt */
     }
 
-    /* SIDEBAR fixiert links */
+    /* SIDEBAR */
     .sidebar {
       position: fixed;
       top: 0;
@@ -93,7 +92,7 @@
       background: #ffffff;
       box-shadow: 2px 0 8px rgba(0,0,0,0.1);
       padding: 2rem 1rem;
-      transform: translateX(-260px); /* unsichtbar zu Beginn */
+      transform: translateX(-260px);
       transition: transform 0.3s ease;
       z-index: 999;
     }
@@ -120,7 +119,7 @@
       text-decoration: none;
       font-weight: bold;
       display: block;
-      padding: 0.5rem 0.5rem;
+      padding: 0.5rem;
       border-radius: 4px;
       transition: background 0.3s ease, color 0.3s ease;
     }
@@ -130,15 +129,17 @@
       text-decoration: none;
     }
 
-    /* HAUPTINHALT */
+    /* HAUPTINHALT (zentriert) */
     .main-content {
       flex: 1;
-      margin-left: 3; 
+      /* Wichtig: margin: 0 auto; => zentriert den Inhalt */
+      margin: 0 auto;
+      max-width: 1200px;
       padding: 2rem;
       transition: margin-left 0.3s ease;
     }
     .sidebar.open ~ .main-content {
-      margin-left: 250px;
+      margin-left: 250px; /* Schiebt das gesamte .main-content rechts, um Platz für Sidebar zu machen */
     }
 
     /* === Überschriften in Sections (zentriert) === */
@@ -326,7 +327,7 @@
 <!-- TOGGLE-BUTTON OBEN LINKS -->
 <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
 
-<!-- HERO-BEREICH MIT IMG -->
+<!-- HERO-BEREICH -->
 <div class="hero">
   <img class="hero-image" src="images/imageGeld.jpg" alt="Hero-Bild" />
   <div class="hero-content">
@@ -337,6 +338,7 @@
 
 <!-- SEITEN-CONTAINER -->
 <div class="page-container">
+  
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <h2>Kategorien</h2>
