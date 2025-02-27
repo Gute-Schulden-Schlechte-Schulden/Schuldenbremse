@@ -21,39 +21,46 @@
       overflow-x: hidden; /* Verhindert horizontales Scrollen bei ausgeklappter Sidebar */
     }
 
-   .hero {
-  position: relative;
+/* HERO-Container */
+.hero {
+  position: relative; 
   width: 100%;
-  height: 60vh;
-  /* HINTERGRUND MIT VERLAUF + BILD */
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("images/imageGeld.jpg") center/cover no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: auto; /* auto, weil das <img> schon Höhe vorgibt */
   text-align: center;
-  color: #fff;
+  color: #fff; /* Weißer Text */
   box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  overflow: hidden; /* Falls das Bild minimal größer ist */
 }
-    .hero-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
-    }
-    .hero p {
-      font-size: 1.3rem;
-      max-width: 800px;
-      margin: 0 auto;
-      line-height: 1.4;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-    }
+
+/* Das <img>, welches den Hero-Hintergrund bildet */
+.hero-image {
+  width: 100%;
+  height: 60vh; 
+  object-fit: cover; /* Damit das Bild proportional skaliert */
+  display: block;
+}
+
+/* Text und Button, die über dem Bild liegen */
+.hero-content {
+  /* Absolut zentriert: Overlay */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 800px; /* Begrenzung der Breite */
+  width: 90%;       /* auf schmalen Screens anpassen */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Bessere Lesbarkeit */
+}
+
+/* Optional: Größere Schriftgrößen & Abstände anpassen */
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+.hero-content p {
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
 
     /* === Container für Sidebar & Hauptinhalt === */
     .page-container {
@@ -330,14 +337,19 @@
 </head>
 <body>
 
-  <!-- HERO-BEREICH MIT HINTERGRUNDBILD -->
-  <div class="hero">
-    <div class="hero-content">
-      <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
-      <h1>Gute Schulden - Schlechte Schulden</h1>
-      <p>Ein Überblick zu Aufgaben, Einnahmen und Ausgaben des deutschen Staates</p>
-    </div>
+<!-- HERO-BEREICH MIT IMG ANSTATT CSS-BACKGROUND -->
+<div class="hero">
+  <!-- Das Bild als <img> -->
+  <img class="hero-image" src="images/imageGeld.jpg" alt="Hero-Bild" />
+
+  <!-- Text-Overlay-Container -->
+  <div class="hero-content">
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+    <h1>Gute Schulden - Schlechte Schulden</h1>
+    <p>Ein Überblick zu Aufgaben, Einnahmen und Ausgaben des deutschen Staates</p>
   </div>
+</div>
+
 
   <!-- SEITEN-CONTAINER -->
   <div class="page-container">
